@@ -133,6 +133,24 @@ class Admin extends CI_Controller
 		
 	}
 
+	public function viewuser($id)
+	{
+		$data['title'] = 'Profil Saya';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['users'] = $this->db->get_where('user', ['id' => $id])->row_array();
+		$data['detail'] = $this->db->get_where('user_detail', ['email' => $data['users']['email']])->row_array();
+		$data['prov'] = $this->db->get_where('reg_provinces', ['id' => $data['users']['province_id']])->row_array();
+		$data['kab'] = $this->db->get_where('reg_regencies', ['id' => $data['users']['regency_id']])->row_array();
+		$data['kec'] = $this->db->get_where('reg_districts', ['id' => $data['users']['district_id']])->row_array();
+		$data['desa'] = $this->db->get_where('reg_villages', ['id' => $data['users']['village_id']])->row_array();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('admin/view-user', $data);
+		$this->load->view('templates/footer');
+	}
+
 	public function mutabaah($id)
 	{
 		$data['title'] = 'Mutabaah Anggota';

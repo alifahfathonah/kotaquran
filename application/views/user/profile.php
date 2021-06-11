@@ -118,7 +118,7 @@
 	        <div class="card-footer">
 	        	<div class="form-group row">
 					<div class="col-sm-9">
-						<small>Last Modified: <?= tanggal_indo(date('Y-m-d',$detail['date_modified'])); ?></small>
+						<small>Last Modified: <?= tanggal_indo(date('Y-m-d',$detail['date_modified'])) . " " . date('H:m:s', $detail['date_modified']); ?></small>
 					</div>
 				</div>
 	        </div>

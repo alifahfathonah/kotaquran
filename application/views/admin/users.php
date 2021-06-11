@@ -52,8 +52,8 @@
   				      <td><?= $user['is_active'] == 1 ? 'Yes' : 'No'; ?></td>
   				      <td><?= date('d-M-Y H:m:s', $user['date_modified']);?></td>
   				      <td>
+                    <a href="<?= base_url('admin/viewuser/') . $user['id']; ?>" class="badge badge-info">detail</a>
   				      		<a href="manageuser/<?= $user['id']; ?>" class="badge badge-success">edit</a>
-                    <a href="<?= base_url('admin/mutabaah/') . $user['id']; ?>" class="badge badge-info">mtb</a>
   				      		<a href="javascript:hapusData(<?= $user['id']; ?>)" class="badge badge-danger">delete</a>
   				      </td>
   				    </tr>

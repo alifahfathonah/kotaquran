@@ -1,6 +1,6 @@
 <div class="login-box">
   <div class="login-logo">
-    <b>PKS</b> Kuningan
+    <b>Kota Qur'an</b> Kuningan
   </div>
   <!-- /.login-logo -->
   <div class="card">

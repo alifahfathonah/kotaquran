@@ -217,8 +217,9 @@ class Admin extends CI_Controller
 
 	public function deleteuser($id)
 	{
-		
+		$data['user'] = $this->db->get_where('user', ['id' => $id])->row_array();
 		$this->db->delete('user', ['id' => $id]);
+		$this->db->delete('user_detail', ['email' => $data['user']['email']]);
 		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> User deleted!</div>');
 		redirect('admin/users');
 	}

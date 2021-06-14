@@ -16,6 +16,11 @@
           </div>
         </div>
       </div>
+	  <div class="row">
+		<div class="col-lg-6">
+			<?= $this->session->flashdata('message'); ?>
+		</div>
+	  </div>
       <!-- /.container-fluid -->
     </section>
 
@@ -131,37 +136,37 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="kendaraan" class="col-sm-4 col-form-label">Kendaraan yang dimiliki</label>
+							<label for="kendaraan" class="col-sm-4 col-form-label">Pendidikan Terakhir (Nama sekolah)</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="kendaraan" name="kendaraan" value="<?= $detail['kendaraan']; ?>">
+								<input type="text" class="form-control" id="kendaraan" name="kendaraan" value="<?= $detail['kendaraan']; ?>" placeholder="Misal: MAN Sukamanah Tasikmalaya">
 								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="pekerjaan" class="col-sm-4 col-form-label">Pekerjaan</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="<?= $detail['pekerjaan']; ?>">
-								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="tempat_kerja" class="col-sm-4 col-form-label">Lembaga/tempat bekerja</label>
+							<label for="tempat_kerja" class="col-sm-4 col-form-label">Nama Orangtua/Wali</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" id="tempat_kerja" name="tempat_kerja" value="<?= $detail['tempat_kerja']; ?>">
 								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="alamat_kerja" class="col-sm-4 col-form-label">Alamat tempat kerja</label>
+							<label for="pekerjaan" class="col-sm-4 col-form-label">Pekerjaan Orangtua/Wali</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="alamat_kerja" name="alamat_kerja" value="<?= $detail['alamat_kerja']; ?>">
+								<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="<?= $detail['pekerjaan']; ?>">
 								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="penghasilan" class="col-sm-4 col-form-label">Penghasilan per bulan</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="penghasilan" name="penghasilan" value="<?= $detail['penghasilan']; ?>">
+								<input type="text" class="form-control" id="penghasilan" name="penghasilan" value="<?= $detail['penghasilan']; ?>" placeholder="Misal: 5000000">
+								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="alamat_kerja" class="col-sm-4 col-form-label">No. Kontak Orangtua/Wali</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="alamat_kerja" name="alamat_kerja" value="<?= $detail['alamat_kerja']; ?>" placeholder="Misal: 081234567890">
 								<?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>

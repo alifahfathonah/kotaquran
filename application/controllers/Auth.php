@@ -111,7 +111,7 @@ class Auth extends CI_Controller
 				'image' => 'default.jpg',
 				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
 				'role_id' => 3,
-				'is_active' => 1,
+				'is_active' => 0,
 				'date_created' => time(),
 				'date_modified' => time()
 			];
@@ -119,6 +119,11 @@ class Auth extends CI_Controller
 			$data2 = [
 				'email' => htmlspecialchars($email),
 				'date_modified' => time()
+			];
+
+			$data3 = [
+				'email' => $this->input->post('email'),
+				'role_id' => 3
 			];
 
 			// siapkan token
@@ -135,9 +140,11 @@ class Auth extends CI_Controller
 			// $this->_sendEmail($token, 'verify');
 			$this->db->insert('user', $data);
 			$this->db->insert('user_detail', $data2);
+			$this->session->set_userdata($data3);
 
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Akun berhasil didaftarkan! Silakan login menggunakan nomor HP dan Password.</div>');
-			redirect('auth');
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Anda berhasil mendaftar! Silakan lengkapi data di bawah ini!</div>');
+			redirect('user/edit');
 		}
 	}
 

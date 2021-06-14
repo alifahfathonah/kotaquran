@@ -2,7 +2,7 @@
 
 <div class="register-box">
   <div class="register-logo">
-    <b>PKS</b> Kuningan
+    <b>Kota Qur'an</b> Kuningan
   </div>
 
   <div class="card">

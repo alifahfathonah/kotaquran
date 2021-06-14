@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 06 Mar 2021 pada 10.12
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.7
+-- Host: localhost
+-- Waktu pembuatan: 13 Jun 2021 pada 17.06
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dpd`
+-- Database: `kotaquran`
 --
 
 -- --------------------------------------------------------
@@ -34,8 +34,6 @@ CREATE TABLE `ci_sessions` (
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
---
 -- Struktur dari tabel `level`
 --
 
@@ -91583,8 +91581,8 @@ INSERT INTO `upa` (`upa_id`, `level_id`, `spu_id`, `nama_upa`, `nama_ketua`, `je
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `gender` int(2) NOT NULL,
-  `upa_id` int(11) NOT NULL,
+  `gender` int(2) NOT NULL DEFAULT 0,
+  `upa_id` int(11) DEFAULT NULL,
   `alamat` text NOT NULL,
   `village_id` varchar(15) NOT NULL,
   `district_id` varchar(15) NOT NULL,
@@ -91604,8 +91602,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `gender`, `upa_id`, `alamat`, `village_id`, `district_id`, `regency_id`, `province_id`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`, `date_modified`) VALUES
-(8, 'Hendra Karunia A., Lc., M.H.', 1, 5, '', '', '', '', '', 'hendrasaleh@gmail.com', 'Foto_Formal_(2).jpg', '$2y$10$XBnbQw2g779dEooZOYU1Bu61sWc8oc0jnurJfPlfua5Lf3K5RuFs6', 1, 1, 1607950063, 1609840824),
-(19, 'Dede Maryam', 0, 77, 'Dussun Manis Rt 09 Rw 02', '3208162012', '320816', '3208', '32', '081291207732', 'default.jpg', '$2y$10$HfujjTNQIp5TXJOVtGjAa.u2b4hB2TSON7OoCpqJCwivVdFEcBa9u', 3, 1, 1614993541, 1614993541);
+(8, 'Hendra Karunia A., Lc.', 1, 5, 'Dusun Manis Rt 09 Rw 02', '3208162012', '320816', '3208', '32', 'hendrasaleh@gmail.com', 'default.jpg', '$2y$10$XBnbQw2g779dEooZOYU1Bu61sWc8oc0jnurJfPlfua5Lf3K5RuFs6', 1, 1, 1607950063, 1623596536);
 
 -- --------------------------------------------------------
 
@@ -91646,6 +91643,7 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 CREATE TABLE `user_detail` (
   `email` varchar(128) NOT NULL,
   `nickname` varchar(128) DEFAULT NULL,
+  `nik` varchar(155) DEFAULT NULL,
   `tempat_lahir` varchar(15) DEFAULT NULL,
   `tgl_lahir` int(11) DEFAULT NULL,
   `hobi` varchar(255) DEFAULT NULL,
@@ -91664,9 +91662,8 @@ CREATE TABLE `user_detail` (
 -- Dumping data untuk tabel `user_detail`
 --
 
-INSERT INTO `user_detail` (`email`, `nickname`, `tempat_lahir`, `tgl_lahir`, `hobi`, `suku`, `sifat_menonjol`, `visi`, `kendaraan`, `pekerjaan`, `tempat_kerja`, `alamat_kerja`, `penghasilan`, `date_modified`) VALUES
-('081291207732', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1614993541),
-('hendrasaleh@gmail.com', 'Hendra Karunia A., Lc., M.H.', '', 0, '', '', '', '', '', '', '', '', 0, 1609840824);
+INSERT INTO `user_detail` (`email`, `nickname`, `nik`, `tempat_lahir`, `tgl_lahir`, `hobi`, `suku`, `sifat_menonjol`, `visi`, `kendaraan`, `pekerjaan`, `tempat_kerja`, `alamat_kerja`, `penghasilan`, `date_modified`) VALUES
+('hendrasaleh@gmail.com', 'Hendra', '3208160601870002', 'KUNINGAN', 536864400, 'MAIN KOMPUTER', 'SUNDA', 'RASA INGIN TAHU', 'Sebaik-baik manusia adalah yang paling bermanfaat bagi sesamanya', 'S2 IAIN SYEKH NURJATI CIREBON', 'BURUH', 'Saleh', '081399329973', 1000000, 1623596536);
 
 -- --------------------------------------------------------
 
@@ -91745,7 +91742,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `submenu_s
 (21, 8, 'Data UPA', 'kaderisasi/upa', 'fas fa-fw fa-user-tie', 3, 1),
 (22, 8, 'Level Anggota', 'kaderisasi/level', 'fas fa-fw fa-graduation-cap', 2, 1),
 (23, 8, 'Mutabaah Anggota', 'kaderisasi/tampilspu', 'fas fa-fw fa-address-book', 4, 1),
-(24, 2, 'Data Mutabaah', 'user/mutabaah', 'fas fa-fw fa-edit', 4, 1);
+(24, 2, 'Data Mutabaah', 'user/mutabaah', 'fas fa-fw fa-edit', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -91889,7 +91886,7 @@ ALTER TABLE `upa`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`

@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- /.container-fluid -->
-      <div class="row">
+	  <div class="row">
         <div class="col-lg-6">
           <?= $this->session->flashdata('message'); ?>
         </div>
@@ -32,32 +32,32 @@
                 <div class="col-lg-6">
                     <div class="form-group row">
                         <div class="col-sm-4">
-                            <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" class="img-thumbnail">
+                            <img src="<?= base_url('assets/img/profile/') . $users['image']; ?>" class="img-thumbnail">
                         </div>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= strtoupper($user['name']); ?></strong></h3>
-                            <h3 class="form-control"><strong><?= $detail['nickname'] == NULL ? 'BELUM DIISI' : strtoupper($detail['nickname']); ?></strong></h3>
-                            <h3 class="form-control"><strong><?= $detail['tempat_lahir'] == NULL ? 'BELUM DIISI' : strtoupper($detail['tempat_lahir']) . ", " . strtoupper(tanggal_indo(date('Y-m-d', $detail['tgl_lahir']))); ?></strong></h3>
-                            <h3 class="form-control"><strong><?= $detail['nik'] == NULL ? 'BELUM DIISI' : $detail['nik']; ?></strong></h3>
-                            <h3 class="form-control"><strong><?= $user['email']; ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($users['name']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['nickname']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['tempat_lahir']) . ", " . strtoupper(tanggal_indo(date('Y-m-d', $detail['tgl_lahir']))); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= $detail['nik']; ?></strong></h3>
+                            <h3 class="form-control"><strong><?= $users['email']; ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="gender" class="col-sm-4 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $user['gender'] == 1 ? 'IKHWAN' : 'AKHWAT'; ?></strong></h3>
+                            <h3 class="form-control"><strong><?= $users['gender'] == 1 ? 'IKHWAN' : 'AKHWAT'; ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="suku" class="col-sm-4 col-form-label">Suku</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['suku'] == NULL ? 'BELUM DIISI' : strtoupper($detail['suku']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['suku']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Alamat Lengkap</label>
                         <div class="col-sm-8">
-                            <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="5"><?= strtoupper($user['alamat']).', DESA '.strtoupper($desa['name']).', KECAMATAN '.strtoupper($kec['name']).', '.strtoupper($kab['name']).', PROVINSI '.strtoupper($prov['name']); ?></textarea>
+                            <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="5"><?= strtoupper($users['alamat']).', DESA '.strtoupper($desa['name']).', KECAMATAN '.strtoupper($kec['name']).', '.strtoupper($kab['name']).', PROVINSI '.strtoupper($prov['name']); ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -65,49 +65,49 @@
                     <div class="form-group row">
                         <label for="hobi" class="col-sm-4 col-form-label">Hobi</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['hobi'] == NULL ? 'BELUM DIISI' : strtoupper($detail['hobi']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['hobi']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="sifat_menonjol" class="col-sm-4 col-form-label">Sifat yang menonjol</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['sifat_menonjol'] == NULL ? 'BELUM DIISI' : strtoupper($detail['sifat_menonjol']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['sifat_menonjol']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="visi" class="col-sm-4 col-form-label">Visi hidup</label>
                         <div class="col-sm-8">
-                            <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="3"><?= $detail['visi'] == NULL ? 'BELUM DIISI' : strtoupper($detail['visi']); ?></textarea>
+                        <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="3"><?= strtoupper($detail['visi']); ?></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kendaraan" class="col-sm-4 col-form-label">Pendidikan Terakhir (Nama sekolah)</label>
+                        <label for="kendaraan" class="col-sm-4 col-form-label">Kendaraan yang dimiliki</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['kendaraan'] == NULL ? 'BELUM DIISI' : strtoupper($detail['kendaraan']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['kendaraan']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="tempat_kerja" class="col-sm-4 col-form-label">Nama Orangtua/Wali</label>
+                        <label for="pekerjaan" class="col-sm-4 col-form-label">Pekerjaan</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['tempat_kerja'] == NULL ? 'BELUM DIISI' : strtoupper($detail['tempat_kerja']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['pekerjaan']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="pekerjaan" class="col-sm-4 col-form-label">Pekerjaan Orangtua/Wali</label>
+                        <label for="tempat_kerja" class="col-sm-4 col-form-label">Lembaga/tempat bekerja</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['pekerjaan'] == NULL ? 'BELUM DIISI' : strtoupper($detail['pekerjaan']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($detail['tempat_kerja']); ?></strong></h3>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="alamat_kerja" class="col-sm-4 col-form-label">Alamat tempat kerja</label>
+                        <div class="col-sm-8">
+                            <h3 class="form-control"><strong><?= strtoupper($detail['alamat_kerja']); ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="penghasilan" class="col-sm-4 col-form-label">Penghasilan per bulan</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['penghasilan'] == NULL ? 'BELUM DIISI' : rupiah($detail['penghasilan']); ?></strong></h3>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="alamat_kerja" class="col-sm-4 col-form-label">No. Kontak Orangtua/Wali</label>
-                        <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $detail['alamat_kerja'] == NULL ? 'BELUM DIISI' : strtoupper($detail['alamat_kerja']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= rupiah($detail['penghasilan']); ?></strong></h3>
                         </div>
                     </div>
                 </div>

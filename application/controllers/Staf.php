@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kaderisasi extends CI_Controller 
+class Staf extends CI_Controller 
 {
 	public function __construct()
 	{
@@ -28,178 +28,178 @@ class Kaderisasi extends CI_Controller
 		$this->load->view('kaderisasi/index', $data);
 	}
 
-	public function dataSPU()
+	public function dataRQ()
 	{
-		$data['title'] = 'Data SPU';
+		$data['title'] = 'Data RQ';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->db->select('*');
 		$this->db->from('reg_regencies');
-		$this->db->join('spu', 'spu.regency_id = reg_regencies.id');
-		$this->db->order_by('spu.id');
-		$data['spu'] = $this->db->get()->result_array();
+		$this->db->join('rumah_quran', 'rumah_quran.regency_id = reg_regencies.id');
+		$this->db->order_by('rumah_quran.id');
+		$data['rq'] = $this->db->get()->result_array();
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/topbar', $data);
 		$this->load->view('templates/sidebar', $data);
-		$this->load->view('kaderisasi/data-spu', $data);
+		$this->load->view('staf/data-rq', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function tambahSPU()
+	public function tambahRQ()
 	{
-		$data['title'] = 'Data SPU';
+		$data['title'] = 'Data RQ';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['kabupaten'] = $this->db->get_where('reg_regencies', ['province_id' => 32])->result_array();
 
-		$this->form_validation->set_rules('nama_spu', 'Nama SPU', 'required|trim');
-		$this->form_validation->set_rules('ketua_spu', 'Ketua SPU', 'required|trim');
+		$this->form_validation->set_rules('nama_rq', 'Nama RQ', 'required|trim');
+		$this->form_validation->set_rules('mudir_rq', 'Mudir RQ', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/tambah-spu', $data);
+			$this->load->view('staf/tambah-rq', $data);
 			$this->load->view('templates/footer');
 		} else {
 
 			$data = [
-				'nama_spu' => $this->input->post('nama_spu'),
-				'ketua_spu' => $this->input->post('ketua_spu'),
+				'nama_rq' => $this->input->post('nama_rq'),
+				'mudir_rq' => $this->input->post('mudir_rq'),
 				'regency_id' => $this->input->post('kabupaten')
 			];
 
-			$this->db->insert('spu', $data);
+			$this->db->insert('rumah_quran	', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasi ditambahkan.</div>');
-			redirect("kaderisasi");
+			redirect("staf/datarq");
 		}
 	}
 
-	public function editSPU($id)
+	public function editRQ($id)
 	{
-		$data['title'] = 'Data SPU';
+		$data['title'] = 'Data RQ';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->db->select('*');
 		$this->db->from('reg_regencies');
-		$this->db->join('spu', 'spu.regency_id = reg_regencies.id');
-		$this->db->where('spu.id', $id);
-		$data['spu'] = $this->db->get()->row_array();
+		$this->db->join('rumah_quran', 'rumah_quran.regency_id = reg_regencies.id');
+		$this->db->where('rumah_quran.id', $id);
+		$data['rq'] = $this->db->get()->row_array();
 		$data['kabupaten'] = $this->db->get_where('reg_regencies', ['province_id' => 32])->result_array();
 
-		$this->form_validation->set_rules('nama_spu', 'Nama SPU', 'required|trim');
-		$this->form_validation->set_rules('ketua_spu', 'Ketua SPU', 'required|trim');
+		$this->form_validation->set_rules('nama_rq', 'Nama RQ', 'required|trim');
+		$this->form_validation->set_rules('mudir_rq', 'Mudir RQ', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/edit-spu', $data);
+			$this->load->view('staf/edit-rq', $data);
 			$this->load->view('templates/footer');
 		} else {
 			
 			$data = [
-				'nama_spu' => $this->input->post('nama_spu'),
-				'ketua_spu' => $this->input->post('ketua_spu'),
+				'nama_rq' => $this->input->post('nama_rq'),
+				'mudir_rq' => $this->input->post('mudir_rq'),
 				'regency_id' => $this->input->post('kabupaten')
 			];
 
 			$this->db->where('id', $id);
-			$this->db->update('spu', $data);
+			$this->db->update('rumah_quran', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasil diperbaharui.</div>');
-			redirect("kaderisasi");
+			redirect("staf/datarq");
 		}
 	}
 
-	public function hapusSPU($id)
+	public function hapusRQ($id)
 	{
 		
-		$this->db->delete('spu', ['id' => $id]);
-		$this->db->delete('upa', ['spu_id' => $id]);
+		$this->db->delete('rumah_quran', ['id' => $id]);
+		$this->db->delete('kelas', ['rq_id' => $id]);
 		$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-danger" role="alert"> Data berhasil dihapus!</div>');
-		redirect('kaderisasi');
+		redirect('staf/datarq');
 	}
 
-	public function level()
+	public function program()
 	{
-		$data['title'] = 'Level Anggota';
+		$data['title'] = 'Program Belajar';
 
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$this->db->order_by('kode_level');
-		$data['level'] = $this->db->get('level')->result_array();
+		$this->db->order_by('kode_program');
+		$data['program'] = $this->db->get('program')->result_array();
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/topbar', $data);
 		$this->load->view('templates/sidebar', $data);
-		$this->load->view('kaderisasi/level', $data);
+		$this->load->view('staf/program', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function tambahLevel()
+	public function tambahProgram()
 	{
-		$data['title'] = 'Level Anggota';
+		$data['title'] = 'Program Belajar';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$this->form_validation->set_rules('kode_level', 'Kode Level', 'required|trim');
-		$this->form_validation->set_rules('nama_level', 'Nama Level', 'required|trim');
+		$this->form_validation->set_rules('kode_program', 'Kode Program', 'required|trim');
+		$this->form_validation->set_rules('nama_program', 'Nama Program', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/tambah-level', $data);
+			$this->load->view('staf/tambah-program', $data);
 			$this->load->view('templates/footer');
 		} else {
 
 			$data = [
-				'kode_level' => $this->input->post('kode_level'),
-				'nama_level' => $this->input->post('nama_level')
+				'kode_program' => $this->input->post('kode_program'),
+				'nama_program' => $this->input->post('nama_program')
 			];
 
-			$this->db->insert('level', $data);
+			$this->db->insert('program', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasi ditambahkan.</div>');
-			redirect("kaderisasi/level");
+			redirect("staf/program");
 		}
 	}
 
-	public function editLevel($id)
+	public function editProgram($id)
 	{
-		$data['title'] = 'Level Anggota';
+		$data['title'] = 'Program Belajar';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$data['level'] = $this->db->get_where('level', ['id' => $id])->row_array();
+		$data['program'] = $this->db->get_where('program', ['prog_id' => $id])->row_array();
 
-		$this->form_validation->set_rules('kode_level', 'Kode Level', 'required|trim');
-		$this->form_validation->set_rules('nama_level', 'Nama Level', 'required|trim');
+		$this->form_validation->set_rules('kode_program', 'Kode Program', 'required|trim');
+		$this->form_validation->set_rules('nama_program', 'Nama Program', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/edit-level', $data);
+			$this->load->view('staf/edit-program', $data);
 			$this->load->view('templates/footer');
 		} else {
 			
 			$data = [
-				'kode_level' => $this->input->post('kode_level'),
-				'nama_level' => $this->input->post('nama_level')
+				'kode_program' => $this->input->post('kode_program'),
+				'nama_program' => $this->input->post('nama_program')
 			];
 
-			$this->db->where('id', $id);
-			$this->db->update('level', $data);
+			$this->db->where('prog_id', $id);
+			$this->db->update('program', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasil diperbaharui.</div>');
-			redirect("kaderisasi/level");
+			redirect("staf/program");
 		}
 	}
 
-	public function hapusLevel($id)
+	public function hapusProgram($id)
 	{
 		
-		$this->db->delete('level', ['id' => $id]);
-		$this->db->delete('upa', ['level_id' => $id]);
+		$this->db->delete('program', ['prog_id' => $id]);
+		$this->db->delete('kelas', ['prog_id' => $id]);
 		$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-danger" role="alert"> Data berhasil dihapus!</div>');
-		redirect('kaderisasi/level');
+		redirect('staf/program');
 	}
 
 	public function upa()
@@ -217,7 +217,7 @@ class Kaderisasi extends CI_Controller
 		$this->db->order_by('upa.nama_ketua');
 		$data['upa'] = $this->db->get()->result_array();
 
-		$this->form_validation->set_rules('level_id', 'Kode Level', 'required|trim');
+		$this->form_validation->set_rules('level_id', 'Kode Program', 'required|trim');
 		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required|trim');
 
 		if ($this->form_validation->run() == false) {	
@@ -254,7 +254,7 @@ class Kaderisasi extends CI_Controller
 		$data['spu'] = $this->db->get('spu')->result_array();
 		$data['level'] = $this->db->get('level')->result_array();
 
-		$this->form_validation->set_rules('level_id', 'Nama Level', 'required|trim');
+		$this->form_validation->set_rules('level_id', 'Nama Program', 'required|trim');
 		$this->form_validation->set_rules('spu_id', 'Nama SPU', 'required|trim');
 		$this->form_validation->set_rules('nama_upa', 'Nama Grup', 'required|trim');
 		$this->form_validation->set_rules('nama_ketua', 'Ketua UPA', 'required|trim');
@@ -296,7 +296,7 @@ class Kaderisasi extends CI_Controller
 		$this->db->where('upa.upa_id', $id);
 		$data['upa'] = $this->db->get()->row_array();
 
-		$this->form_validation->set_rules('level_id', 'Nama Level', 'required|trim');
+		$this->form_validation->set_rules('level_id', 'Nama Program', 'required|trim');
 		$this->form_validation->set_rules('spu_id', 'Nama SPU', 'required|trim');
 		$this->form_validation->set_rules('nama_upa', 'Nama Grup', 'required|trim');
 		$this->form_validation->set_rules('nama_ketua', 'Ketua UPA', 'required|trim');

@@ -31,26 +31,26 @@
           		<?php endif; ?>
           		<div class="card">
 					<div class="card-header">
-					Kelola SPU
+					Kelola Program
 					</div>
 					<div class="card-body">
 						
-						<form action="<?= base_url('kaderisasi/tambahlevel/'); ?>" method="post">
+						<form action="<?= base_url('staf/editprogram')."/".$program['prog_id']; ?>" method="post">
 					      <div class="modal-body">
 						  	<div class="form-group row">
-								<label for="kode_level" class="col-sm-4 col-form-label">Kode Level</label>
+								<label for="kode_program" class="col-sm-4 col-form-label">Kode program</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="kode_level" name="kode_level" placeholder="Misal: A1" required>
+							    	<input type="text" class="form-control" id="kode_program" name="kode_program" value="<?= $program['kode_program']; ?>" required>
 							    </div>
 						  	</div>
 							<div class="form-group row">
-								<label for="nama_level" class="col-sm-4 col-form-label">Nama Level</label>
+								<label for="nama_program" class="col-sm-4 col-form-label">Nama program</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="nama_level" name="nama_level" placeholder="Misal: Penggerak" required>
+							    	<input type="text" class="form-control" id="nama_program" name="nama_program" value="<?= $program['nama_program']; ?>" required>
 							    </div>
 						  	</div>
 					      </div>
-						<a href="<?= base_url('kaderisasi/level'); ?>" class="btn btn-secondary">Cancel</a>
+						<a href="<?= base_url('staf/program'); ?>" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">Save</button>
 						</form>
 						

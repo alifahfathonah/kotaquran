@@ -35,25 +35,25 @@
 					</div>
 					<div class="card-body">
 						
-						<form action="<?= base_url('kaderisasi/editspu')."/".$spu['id']; ?>" method="post">
+						<form action="<?= base_url('staf/editrq')."/".$rq['id']; ?>" method="post">
 					      <div class="modal-body">
 						  	<div class="form-group row">
-								<label for="nama_spu" class="col-sm-4 col-form-label">Nama SPU</label>
+								<label for="nama_rq" class="col-sm-4 col-form-label">Nama SPU</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="nama_spu" name="nama_spu" value="<?= $spu['nama_spu']; ?>" required>
+							    	<input type="text" class="form-control" id="nama_rq" name="nama_rq" value="<?= $rq['nama_rq']; ?>" required>
 							    </div>
 						  	</div>
 							<div class="form-group row">
-								<label for="ketua_spu" class="col-sm-4 col-form-label">Ketua SPU</label>
+								<label for="mudir_rq" class="col-sm-4 col-form-label">Ketua SPU</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="ketua_spu" name="ketua_spu" value="<?= $spu['ketua_spu']; ?>" required>
+							    	<input type="text" class="form-control" id="mudir_rq" name="mudir_rq" value="<?= $rq['mudir_rq']; ?>" required>
 							    </div>
 						  	</div>
 						  	<div class="form-group row">
 								<label for="kabupaten" class="col-sm-4 col-form-label">Kabupaten</label>
 								<div class="col-sm-8">
 									<select name="kabupaten" id="kabupaten" class="form-control select2">
-										<option value="<?= $spu['regency_id'] ?>"><?= $spu['name']; ?></option>
+										<option value="<?= $rq['regency_id'] ?>"><?= $rq['name']; ?></option>
 										<?php foreach ($kabupaten AS $kab) : ?>
 											<option value="<?= $kab['id'] ?>"><?= $kab['name']; ?></option>
 										<?php endforeach; ?>
@@ -61,7 +61,7 @@
 								</div>
 							</div>
 					      </div>
-						<a href="<?= base_url('kaderisasi'); ?>" class="btn btn-secondary">Cancel</a>
+						<a href="<?= base_url('staf/datarq'); ?>" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">Save</button>
 						</form>
 						

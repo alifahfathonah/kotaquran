@@ -35,33 +35,22 @@
 					</div>
 					<div class="card-body">
 						
-						<form action="<?= base_url('kaderisasi/tambahspu/'); ?>" method="post">
+						<form action="<?= base_url('staf/tambahprogram/'); ?>" method="post">
 					      <div class="modal-body">
 						  	<div class="form-group row">
-								<label for="nama_spu" class="col-sm-4 col-form-label">Nama SPU</label>
+								<label for="kode_program" class="col-sm-4 col-form-label">Kode Program</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="nama_spu" name="nama_spu" placeholder="Misal: SPU 1" required>
+							    	<input type="text" class="form-control" id="kode_program" name="kode_program" placeholder="Misal: A1" required>
 							    </div>
 						  	</div>
 							<div class="form-group row">
-								<label for="ketua_spu" class="col-sm-4 col-form-label">Ketua SPU</label>
+								<label for="nama_program" class="col-sm-4 col-form-label">Nama Program</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="ketua_spu" name="ketua_spu" placeholder="Misal: Ahmad" required>
+							    	<input type="text" class="form-control" id="nama_program" name="nama_program" placeholder="Misal: Athfal" required>
 							    </div>
 						  	</div>
-						  	<div class="form-group row">
-								<label for="kabupaten" class="col-sm-4 col-form-label">Kabupaten</label>
-								<div class="col-sm-8">
-									<select name="kabupaten" id="kabupaten" class="form-control select2">
-										<option value="">--Pilih Kabupaten--</option>
-										<?php foreach ($kabupaten AS $kab) : ?>
-											<option value="<?= $kab['id']; ?>"><?= $kab['name']; ?></option>
-										<?php endforeach; ?>
-									</select>
-								</div>
-							</div>
 					      </div>
-						<a href="<?= base_url('kaderisasi'); ?>" class="btn btn-secondary">Cancel</a>
+						<a href="<?= base_url('staf/program'); ?>" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">Save</button>
 						</form>
 						

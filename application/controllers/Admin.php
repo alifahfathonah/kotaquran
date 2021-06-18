@@ -197,12 +197,12 @@ class Admin extends CI_Controller
 			$this->load->view('templates/footer');
 		} else {
 			$email = $this->input->post('email');
-			$new_password = $this->input->post('new_password');
-			$password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+			// $new_password = $this->input->post('new_password');
+			// $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 			$data = [
 				'name' => htmlspecialchars($this->input->post('name', true)),
 				'role_id' => $this->input->post('role_id'),
-				'password' => $password_hash,
+				// 'password' => $password_hash,
 				'is_active' => $this->input->post('is_active'),
 				'date_modified' => time()
 			];

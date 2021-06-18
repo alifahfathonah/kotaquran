@@ -60,12 +60,12 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group row">
+							<!-- <div class="form-group row">
 								<label for="new_password" class="col-sm-4 col-form-label">Kata sandi baru</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control" id="new_password" name="new_password" value="<?= $users['password']; ?>">
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 						  		<div class="form-check">
 									<input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" checked>

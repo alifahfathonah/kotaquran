@@ -32,20 +32,20 @@
                 <div class="col-lg-6">
                     <div class="form-group row">
                         <div class="col-sm-4">
-                            <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" class="img-thumbnail">
+                            <img src="<?= base_url('assets/img/profile/') . $users['image']; ?>" class="img-thumbnail">
                         </div>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= strtoupper($user['name']); ?></strong></h3>
+                            <h3 class="form-control"><strong><?= strtoupper($users['name']); ?></strong></h3>
                             <h3 class="form-control"><strong><?= $detail['nickname'] == NULL ? 'BELUM DIISI' : strtoupper($detail['nickname']); ?></strong></h3>
                             <h3 class="form-control"><strong><?= $detail['tempat_lahir'] == NULL ? 'BELUM DIISI' : strtoupper($detail['tempat_lahir']) . ", " . strtoupper(tanggal_indo(date('Y-m-d', $detail['tgl_lahir']))); ?></strong></h3>
                             <h3 class="form-control"><strong><?= $detail['nik'] == NULL ? 'BELUM DIISI' : $detail['nik']; ?></strong></h3>
-                            <h3 class="form-control"><strong><?= $user['email']; ?></strong></h3>
+                            <h3 class="form-control"><strong><?= $users['email']; ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="gender" class="col-sm-4 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-8">
-                            <h3 class="form-control"><strong><?= $user['gender'] == 1 ? 'IKHWAN' : 'AKHWAT'; ?></strong></h3>
+                            <h3 class="form-control"><strong><?= $users['gender'] == 1 ? 'IKHWAN' : 'AKHWAT'; ?></strong></h3>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -57,7 +57,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Alamat Lengkap</label>
                         <div class="col-sm-8">
-                            <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="5"><?= strtoupper($user['alamat']).', DESA '.strtoupper($desa['name']).', KECAMATAN '.strtoupper($kec['name']).', '.strtoupper($kab['name']).', PROVINSI '.strtoupper($prov['name']); ?></textarea>
+                            <textarea name="visi" id="visi" class="form-control font-weight-bold" rows="5"><?= strtoupper($users['alamat']).', DESA '.strtoupper($desa['name']).', KECAMATAN '.strtoupper($kec['name']).', '.strtoupper($kab['name']).', PROVINSI '.strtoupper($prov['name']); ?></textarea>
                         </div>
                     </div>
                 </div>

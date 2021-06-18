@@ -59,7 +59,7 @@ class Auth extends CI_Controller
 			redirect('auth');
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> This account has not been activated!</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Akun anda belum aktif. Silakan konfirmasi ke admin.</div>');
 			redirect('auth');
 			}
 		} else {

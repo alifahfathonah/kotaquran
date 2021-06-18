@@ -182,9 +182,7 @@ class Admin extends CI_Controller
 		$this->db->from('user');
 		$this->db->join('user_role', 'user_role.id = user.role_id');
 		$this->db->where('user.id', $id);
-		$this->db->order_by('user_role.id', 'ASC');
 		$data['users'] = $this->db->get()->row_array();
-		
 
 		$this->form_validation->set_rules('name', 'Name', 'required|trim');
 		$this->form_validation->set_rules('role_id', 'Role', 'required|trim');
@@ -197,12 +195,18 @@ class Admin extends CI_Controller
 			$this->load->view('templates/footer');
 		} else {
 			$email = $this->input->post('email');
-			// $new_password = $this->input->post('new_password');
-			// $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+			$user = $this->db->get_where('user', ['email' => $email])->row_array();
+			$old_password = $user['password'];
+			if ($this->input->post('new_password') == NULL) {
+				$password = $old_password;
+			} else {
+				$new_password = $this->input->post('new_password');
+				$password = password_hash($new_password, PASSWORD_DEFAULT);
+			}
 			$data = [
 				'name' => htmlspecialchars($this->input->post('name', true)),
 				'role_id' => $this->input->post('role_id'),
-				// 'password' => $password_hash,
+				'password' => $password,
 				'is_active' => $this->input->post('is_active'),
 				'date_modified' => time()
 			];

@@ -14,17 +14,6 @@ class Staf extends CI_Controller
 		$data['title'] = 'Dashboard Kaderisasi';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		// $data['kecamatan'] = $this->db->query("SELECT `reg_districts`.`name` AS 'kecamatan', COUNT(`reg_districts`.`name`) AS 'jml_kec' FROM `user` JOIN `reg_districts` ON `user`.`district_id` = `reg_districts`.`id` GROUP BY `district_id`")->result_array();
-		// $data['spu'] = $this->db->query("SELECT `spu`.`nama_spu` AS 'nama_spu', COUNT(`upa`.`spu_id`) AS 'jml_spu' FROM `user` JOIN `upa` ON `user`.`upa_id` = `upa`.`upa_id` JOIN `spu` ON `upa`.`spu_id` = `spu`.`id` GROUP BY `upa`.`spu_id`")->result_array();
-		// $data['akhwat'] = $this->db->query("SELECT `level`.`nama_level` AS 'nama_level', COUNT(`level`.`id`) AS 'jml_level' FROM `user` JOIN `upa` ON `user`.`upa_id` = `upa`.`upa_id` JOIN `level` ON `upa`.`level_id` = `level`.`id` WHERE `user`.`gender` = 0 GROUP BY `level`.`id`")->result_array();
-		// $data['ikhwan'] = $this->db->query("SELECT `level`.`nama_level` AS 'nama_level', COUNT(`level`.`id`) AS 'jml_level' FROM `user` JOIN `upa` ON `user`.`upa_id` = `upa`.`upa_id` JOIN `level` ON `upa`.`level_id` = `level`.`id` WHERE `user`.`gender` = 1 GROUP BY `level`.`id`")->result_array();		
-
-		// $this->load->view('templates/header', $data);
-		// $this->load->view('templates/topbar', $data);
-		// $this->load->view('templates/sidebar', $data);
-		// $this->load->view('kaderisasi/index', $data);
-		// $this->load->view('templates/footer');
-
 		$this->load->view('kaderisasi/index', $data);
 	}
 
@@ -202,46 +191,46 @@ class Staf extends CI_Controller
 		redirect('staf/program');
 	}
 
-	public function upa()
+	public function kelas()
 	{
-		$data['title'] = 'Data UPA';
+		$data['title'] = 'Kelas';
 
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['level'] = $this->db->get('level')->result_array();
+		$data['program'] = $this->db->get('program')->result_array();
 
 		$this->db->select('*');
-		$this->db->from('spu');
-		$this->db->join('upa', 'upa.spu_id = spu.id');
-		$this->db->join('level', 'level.id = upa.level_id');
-		$this->db->where('upa.level_id', 5);
-		$this->db->order_by('upa.nama_ketua');
-		$data['upa'] = $this->db->get()->result_array();
+		$this->db->from('rumah_quran');
+		$this->db->join('kelas', 'kelas.rq_id = rumah_quran.id');
+		$this->db->join('program', 'program.prog_id = kelas.prog_id');
+		$this->db->order_by('kelas.jenis_kelamin', 'DESC');
+		$this->db->order_by('kelas.prog_id', 'ASC');
+		$data['kelas'] = $this->db->get()->result_array();
 
-		$this->form_validation->set_rules('level_id', 'Kode Program', 'required|trim');
+		$this->form_validation->set_rules('prog_id', 'Kode Program', 'required|trim');
 		$this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required|trim');
 
 		if ($this->form_validation->run() == false) {	
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/upa', $data);
+			$this->load->view('staf/kelas', $data);
 			$this->load->view('templates/footer');
 		} else {
-			$level = $this->input->post('level_id');
+			$program = $this->input->post('prog_id');
 			$jenis_kelamin = $this->input->post('jenis_kelamin');
 			$this->db->select('*');
-			$this->db->from('spu');
-			$this->db->join('upa', 'upa.spu_id = spu.id');
-			$this->db->join('level', 'level.id = upa.level_id');
-			$this->db->where('upa.level_id', $level);
-			$this->db->where('upa.jenis_kelamin', $jenis_kelamin);
-			$this->db->order_by('upa.nama_ketua');
-			$data['upa'] = $this->db->get()->result_array();
+			$this->db->from('rumah_quran');
+			$this->db->join('kelas', 'kelas.rq_id = rumah_quran.id');
+			$this->db->join('program', 'program.prog_id = kelas.prog_id');
+			$this->db->where('kelas.prog_id', $program);
+			$this->db->where('kelas.jenis_kelamin', $jenis_kelamin);
+			$this->db->order_by('kelas.pengajar');
+			$data['kelas'] = $this->db->get()->result_array();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/upa', $data);
+			$this->load->view('staf/kelas', $data);
 			$this->load->view('templates/footer');
 		}
 	}

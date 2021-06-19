@@ -27,18 +27,18 @@
             <?= $this->session->flashdata('message'); ?>
             <div class="row">
               <div class="col-sm-12">
-                <a class="btn btn-info ml-2 mb-3" href="<?= base_url('kaderisasi/tambahupa/'); ?>">Tambah UPA</a>
+                <a class="btn btn-info ml-2 mb-3" href="<?= base_url('staf/tambahupa/'); ?>">Tambah UPA</a>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <form action="<?= base_url('kaderisasi/upa'); ?>" method="post">
+                <form action="<?= base_url('staf/kelas'); ?>" method="post">
                   <div class="form-group col-sm-6 row">
                     <div class="col-sm-5">
-                      <select name="level_id" id="level_id" class="form-control select2">
-                        <option value="">Pilih Level</option>
-                        <?php foreach ($level as $lev) : ?>
-                        <option value="<?= $lev['id']; ?>"><?= $lev['kode_level'].' - '.$lev['nama_level']; ?></option>
+                      <select name="prog_id" id="prog_id" class="form-control select2">
+                        <option value="">Pilih Program</option>
+                        <?php foreach ($program as $prog) : ?>
+                        <option value="<?= $prog['prog_id']; ?>"><?= $prog['kode_program'].' - '.$prog['nama_program']; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -61,29 +61,27 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Ketua UPA</th>
-                  <th>Nama Grup</th>
-                  <th>Level</th>
-                  <th>SPU</th>
+                  <th>Rumah Qur'an</th>
+                  <th>Program</th>
                   <th>Kelompok</th>
+                  <th>Pengajar</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                   $i= 1;
-                  foreach ($upa as $u) : 
+                  foreach ($kelas as $kls) : 
                 ?>
                 <tr>
                   <th scope="row"><?= $i; ?></th>
-                  <td><?= $u['nama_ketua']; ?></td>
-                  <td><?= $u['nama_upa']; ?></td>
-                  <td><?= $u['nama_level']; ?></td>
-                  <td><?= $u['nama_spu']; ?></td>
-                  <td><?= $u['jenis_kelamin'] == 1 ? 'Ikhwan' : 'Akhwat'; ?></td>
+                  <td><?= $kls['nama_rq']; ?></td>
+                  <td><?= $kls['nama_program']; ?></td>
+                  <td><?= $kls['jenis_kelamin'] == 1 ? 'Ikhwan' : 'Akhwat'; ?></td>
+                  <td><?= $kls['pengajar']; ?></td>
                   <td>
-                    <a href="<?= base_url('kaderisasi/editupa/') . $u['upa_id']; ?>" class="badge badge-success">edit</a>
-                    <a href="javascript:hapusData(<?= $u['upa_id']; ?>)" class="badge badge-danger">delete</a>
+                    <a href="<?= base_url('staf/editupa/') . $kls['kelas_id']; ?>" class="badge badge-success">edit</a>
+                    <a href="javascript:hapusData(<?= $kls['kelas_id']; ?>)" class="badge badge-danger">delete</a>
                   </td>
                 </tr>
                 <?php

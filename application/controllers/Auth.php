@@ -39,29 +39,29 @@ class Auth extends CI_Controller
 		// jika usernya ada
 		if ( $user ) {
 			# code...
-			// jika usernya aktif
-			if ( $user['is_active'] == 1) {
+			if (password_verify($password, $user['password'])) {
 				# code...
-				if (password_verify($password, $user['password'])) {
-					# code...
-					$data = [
-						'email' => $user['email'],
-						'role_id' => $user['role_id']
-					];
-					$this->session->set_userdata($data);
-					if ( $user['role_id'] == 1 ) {
-						redirect('admin');
-					} else {
+				$data = [
+					'email' => $user['email'],
+					'role_id' => $user['role_id']
+				];
+				$this->session->set_userdata($data);
+				if ( $user['role_id'] == 1 ) {
+					redirect('admin');
+				} else {
+						// jika usernya aktif
+						if ( $user['is_active'] == 1) {
+							# code...
 						redirect('user');
-					}
+						} else {
+							$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Akun anda belum aktif. Silakan konfirmasi ke admin.</div>');
+						redirect('user/edit');
+						}
+				}
 				} else {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Password salah!</div>');
 			redirect('auth');
 				}
-			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Akun anda belum aktif. Silakan konfirmasi ke admin.</div>');
-			redirect('auth');
-			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Akun belum terdaftar!</div>');
 			redirect('auth');
@@ -249,10 +249,10 @@ class Auth extends CI_Controller
         echo json_encode($data);
     }
 
-    function get_ketua()
+    function get_pengajar()
     {
         $jenis_kelamin=$this->input->post('jenis_kelamin');
-        $data=$this->model_select->Pilih_ketua($jenis_kelamin);
+        $data=$this->model_select->Pilih_pengajar($jenis_kelamin);
         echo json_encode($data);
     }
 

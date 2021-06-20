@@ -77,7 +77,7 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="tgl_lahir" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-d', $detail['tgl_lahir']); ?>" required />
+                                <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="tgl_lahir" data-date-format="yyyy-mm-dd" placeholder="klik simbol kalender di samping" value="<?= $detail['tgl_lahir'] == NULL ? "" : date('Y-m-d', $detail['tgl_lahir']); ?>" required />
                                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>

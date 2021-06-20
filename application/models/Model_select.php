@@ -26,11 +26,17 @@ Class Model_select extends CI_Model
         return $this->db->from('reg_villages')->get()->result();
     }
 
-    function Pilih_ketua($id)
+    function Pilih_pengajar($id)
     {
-        $this->db->where('jenis_kelamin', $id);
-        $this->db->order_by('nama_ketua', 'ASC');
-        return $this->db->from('upa')->get()->result();
+        $this->db->select('*');
+		$this->db->from('kelas');
+		$this->db->join('program', 'program.prog_id = kelas.prog_id');
+		$this->db->where('kelas.jenis_kelamin', $id);
+		return $this->db->get()->result();
+        
+        // $this->db->where('jenis_kelamin', $id);
+        // $this->db->order_by('nama_ketua', 'ASC');
+        // return $this->db->from('kelas')->get()->result();
     }
 
 }

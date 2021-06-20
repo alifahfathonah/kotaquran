@@ -20,11 +20,18 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <select class="form-control" name="j_kelamin" required>
+          <select class="form-control" name="j_kelamin" id="j_kelamin" required>
             <option value="">--Jenis Kelamin--</option>
             <option value="1">Laki-laki</option>
             <option value="0">Perempuan</option>
           </select>
+          <div class="input-group-append">
+            <div class="input-group-text">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <select class="form-control" name="pengajar" id="pengajar" required></select>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
@@ -183,6 +190,30 @@
                     html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
                 }
                 $('#desa').html(html);
+
+            }
+        });
+    });
+    $("#j_kelamin").change(function(){
+
+        // variabel dari nilai combo box kendaraan
+        var jenis_kelamin = $("#j_kelamin").val();
+
+        // Menggunakan ajax untuk mengirim dan dan menerima data dari server
+        $.ajax({
+            url : "<?php echo base_url();?>/auth/get_pengajar",
+            method : "POST",
+            data : {jenis_kelamin:jenis_kelamin},
+            async : false,
+            dataType : 'json',
+            success: function(data){
+                var html = "<option value=''>--Pilih Program--</option>";
+                var i;
+
+                for(i=0; i<data.length; i++){
+                    html += '<option value='+data[i].kelas_id+'>'+data[i].nama_program+'</option>';
+                }
+                $('#pengajar').html(html);
 
             }
         });

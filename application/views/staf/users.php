@@ -32,6 +32,7 @@
   				    <tr>
   				      <th scope="col">#</th>
   				      <th scope="col">Nama</th>
+                <th scope="col">No. Handphone</th>
   				      <th scope="col">Alamat Asal</th>
                 <th scope="col">Rumah Qur'an</th>
                 <th scope="col">Kelas - Guru</th>
@@ -47,6 +48,7 @@
   				    <tr>
   				      <th scope="row"><?= $i; ?></th>
   				      <td><?= $users['name']; ?></td>
+                <td><?= $users['email']; ?></td>
   				      <td><?= $users['regency'] . ", " . $users['province']; ?></td>
                 <td><?= $users['nama_rq']; ?></td>
                 <td><?= $users['program'] . " - " . $users['pengajar']; ?></td>

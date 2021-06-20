@@ -322,7 +322,7 @@ class Staf extends CI_Controller
 		$data['title'] = 'Kelola Peserta';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$this->db->select('user.id AS user_id, user.name AS name, user.is_active AS active, kelas.pengajar AS pengajar, rumah_quran.nama_rq AS nama_rq, program.nama_program AS program, reg_regencies.name AS regency, reg_provinces.name AS province');
+		$this->db->select('user.id AS user_id, user.email AS email, user.name AS name, user.is_active AS active, kelas.pengajar AS pengajar, rumah_quran.nama_rq AS nama_rq, program.nama_program AS program, reg_regencies.name AS regency, reg_provinces.name AS province');
 		$this->db->from('user');
 		$this->db->join('kelas', 'user.kelas_id = kelas.kelas_id');
 		$this->db->join('rumah_quran', 'kelas.rq_id = rumah_quran.id');

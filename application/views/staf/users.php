@@ -28,40 +28,41 @@
 		  		<?= $this->session->flashdata('message'); ?>
 
 		  		<table id="example1" class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">Nama</th>
-				      <th scope="col">Level</th>
-				      <th scope="col">Grup</th>
-				      <th scope="col">Pembimbing UPA</th>
-              <th scope="col">SPU</th>
-				      <th scope="col">Edit UPA</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  	<?php
-				  		$i = 1;
-				  		foreach ($users as $user) :
-				  	?>
-				    <tr>
-				      <th scope="row"><?= $i; ?></th>
-				      <td><?= strtoupper($user['name']); ?></td>
-				      <td><?= $user['nama_level']; ?></td>
-				      <td><?= $user['nama_upa']; ?></td>
-				      <td><?= $user['nama_ketua']; ?></td>
-				      <td><?= $user['nama_spu'];?></td>
-				      <td>
-				      		<a href="manageuser/<?= $user['user_id']; ?>" class="badge badge-success">edit</a>
-				      		<!-- <a href="javascript:hapusData(<?= $user['user_id']; ?>)" class="badge badge-danger">delete</a> -->
-				      </td>
-				    </tr>
-					<?php
-						$i++;
-						endforeach;
-					?>
-				  </tbody>
-				</table>
+  				  <thead>
+  				    <tr>
+  				      <th scope="col">#</th>
+  				      <th scope="col">Nama</th>
+  				      <th scope="col">Alamat Asal</th>
+                <th scope="col">Rumah Qur'an</th>
+                <th scope="col">Kelas - Guru</th>
+  				      <th scope="col">Status</th>
+  				      <th scope="col">Action</th>
+  				    </tr>
+  				  </thead>
+  				  <tbody>
+  				  	<?php
+  				  		$i = 1;
+  				  		foreach ($users as $users) :
+  				  	?>
+  				    <tr>
+  				      <th scope="row"><?= $i; ?></th>
+  				      <td><?= $users['name']; ?></td>
+  				      <td><?= $users['regency'] . ", " . $users['province']; ?></td>
+                <td><?= $users['nama_rq']; ?></td>
+                <td><?= $users['program'] . " - " . $users['pengajar']; ?></td>
+  				      <td><?= $users['active'] == 1 ? 'Aktif' : 'Tidak aktif'; ?></td>
+  				      <td>
+                    <a href="<?= base_url('staf/viewuser/') . $users['user_id']; ?>" class="badge badge-info">detail</a>
+  				      		<a href="manageuser/<?= $users['user_id']; ?>" class="badge badge-success">edit</a>
+  				      		<a href="javascript:hapusData(<?= $users['user_id']; ?>)" class="badge badge-danger">delete</a>
+  				      </td>
+  				    </tr>
+  					<?php
+  						$i++;
+  						endforeach;
+  					?>
+  				  </tbody>
+				  </table>
 		  	</div>
         </div>
       </div>
@@ -95,6 +96,3 @@
 		}
 	}
 </script>
-
-
-

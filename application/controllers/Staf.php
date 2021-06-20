@@ -235,90 +235,190 @@ class Staf extends CI_Controller
 		}
 	}
 
-	public function tambahUPA()
+	public function tambahKelas()
 	{
-		$data['title'] = 'Data UPA';
+		$data['title'] = 'Kelas';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$data['spu'] = $this->db->get('spu')->result_array();
-		$data['level'] = $this->db->get('level')->result_array();
+		$data['rq'] = $this->db->get('rumah_quran')->result_array();
+		$data['program'] = $this->db->get('program')->result_array();
 
-		$this->form_validation->set_rules('level_id', 'Nama Program', 'required|trim');
-		$this->form_validation->set_rules('spu_id', 'Nama SPU', 'required|trim');
-		$this->form_validation->set_rules('nama_upa', 'Nama Grup', 'required|trim');
-		$this->form_validation->set_rules('nama_ketua', 'Ketua UPA', 'required|trim');
+		$this->form_validation->set_rules('prog_id', 'Nama Program', 'required|trim');
+		$this->form_validation->set_rules('rq_id', 'Nama RQ', 'required|trim');
+		$this->form_validation->set_rules('pengajar', 'Pengajar', 'required|trim');
 		$this->form_validation->set_rules('jenis_kelamin', 'Kelompok', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/tambah-upa', $data);
+			$this->load->view('staf/tambah-kelas', $data);
 			$this->load->view('templates/footer');
 		} else {
 			$data = [
-				'level_id' => $this->input->post('level_id'),
-				'spu_id' => $this->input->post('spu_id'),
-				'nama_upa' => $this->input->post('nama_upa'),
-				'nama_ketua' => $this->input->post('nama_ketua'),
+				'prog_id' => $this->input->post('prog_id'),
+				'rq_id' => $this->input->post('rq_id'),
+				'pengajar' => $this->input->post('pengajar'),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin')
 			];
 
-			$this->db->insert('upa', $data);
+			$this->db->insert('kelas', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasi ditambahkan.</div>');
-			redirect("kaderisasi/upa");
+			redirect("staf/kelas");
 		}
 	}
 
-	public function editUPA($id)
+	public function editKelas($id)
 	{
-		$data['title'] = 'Data UPA';
+		$data['title'] = 'Kelas';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-		$data['spu'] = $this->db->get('spu')->result_array();
-		$data['level'] = $this->db->get('level')->result_array();
+		$data['rq'] = $this->db->get('rumah_quran')->result_array();
+		$data['program'] = $this->db->get('program')->result_array();
 
 		$this->db->select('*');
-		$this->db->from('spu');
-		$this->db->join('upa', 'upa.spu_id = spu.id');
-		$this->db->join('level', 'level.id = upa.level_id');
-		$this->db->where('upa.upa_id', $id);
-		$data['upa'] = $this->db->get()->row_array();
+		$this->db->from('rumah_quran');
+		$this->db->join('kelas', 'kelas.rq_id = rumah_quran.id');
+		$this->db->join('program', 'program.prog_id = kelas.prog_id');
+		$this->db->where('kelas.kelas_id', $id);
+		$data['kelas'] = $this->db->get()->row_array();
 
-		$this->form_validation->set_rules('level_id', 'Nama Program', 'required|trim');
-		$this->form_validation->set_rules('spu_id', 'Nama SPU', 'required|trim');
-		$this->form_validation->set_rules('nama_upa', 'Nama Grup', 'required|trim');
-		$this->form_validation->set_rules('nama_ketua', 'Ketua UPA', 'required|trim');
+		$this->form_validation->set_rules('prog_id', 'Nama Program', 'required|trim');
+		$this->form_validation->set_rules('rq_id', 'Nama RQ', 'required|trim');
+		$this->form_validation->set_rules('pengajar', 'Pengajar', 'required|trim');
 		$this->form_validation->set_rules('jenis_kelamin', 'Kelompok', 'required|trim');
 		
 		if ( $this->form_validation->run() == false ) {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/edit-upa', $data);
+			$this->load->view('staf/edit-kelas', $data);
 			$this->load->view('templates/footer');
 		} else {
 			
 			$data = [
-				'level_id' => $this->input->post('level_id'),
-				'spu_id' => $this->input->post('spu_id'),
-				'nama_upa' => $this->input->post('nama_upa'),
-				'nama_ketua' => $this->input->post('nama_ketua'),
+				'prog_id' => $this->input->post('prog_id'),
+				'rq_id' => $this->input->post('rq_id'),
+				'pengajar' => $this->input->post('pengajar'),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin')
 			];
 
-			$this->db->where('upa_id', $id);
-			$this->db->update('upa', $data);
+			$this->db->where('kelas_id', $id);
+			$this->db->update('kelas', $data);
 			$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-success" role="alert"> Data berhasil diperbaharui.</div>');
-			redirect("kaderisasi/upa");
+			redirect("staf/kelas");
 		}
 	}
 
-	public function hapusUPA($id)
+	public function hapusKelas($id)
 	{
-		$this->db->delete('upa', ['upa_id' => $id]);
+		$this->db->delete('kelas', ['kelas_id' => $id]);
 		$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-danger" role="alert"> Data berhasil dihapus!</div>');
-		redirect('kaderisasi/upa');
+		redirect('staf/kelas');
+	}
+
+	public function users()
+	{
+		$data['title'] = 'Kelola Peserta';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->db->select('user.id AS user_id, user.name AS name, user.is_active AS active, kelas.pengajar AS pengajar, rumah_quran.nama_rq AS nama_rq, program.nama_program AS program, reg_regencies.name AS regency, reg_provinces.name AS province');
+		$this->db->from('user');
+		$this->db->join('kelas', 'user.kelas_id = kelas.kelas_id');
+		$this->db->join('rumah_quran', 'kelas.rq_id = rumah_quran.id');
+		$this->db->join('program', 'kelas.prog_id = program.prog_id');
+		$this->db->join('reg_regencies', 'user.regency_id = reg_regencies.id');
+		$this->db->join('reg_provinces', 'user.province_id = reg_provinces.id');
+		$this->db->where('user.role_id >', 1);
+		$this->db->order_by('user.name', 'ASC');
+		$data['users'] = $this->db->get()->result_array();
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('staf/users', $data);
+		$this->load->view('templates/footer');
+		
+	}
+
+	public function viewuser($id)
+	{
+		$data['title'] = 'Detail Peserta';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['users'] = $this->db->get_where('user', ['id' => $id])->row_array();
+		$data['detail'] = $this->db->get_where('user_detail', ['email' => $data['users']['email']])->row_array();
+		$data['prov'] = $this->db->get_where('reg_provinces', ['id' => $data['users']['province_id']])->row_array();
+		$data['kab'] = $this->db->get_where('reg_regencies', ['id' => $data['users']['regency_id']])->row_array();
+		$data['kec'] = $this->db->get_where('reg_districts', ['id' => $data['users']['district_id']])->row_array();
+		$data['desa'] = $this->db->get_where('reg_villages', ['id' => $data['users']['village_id']])->row_array();
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('templates/sidebar', $data);
+		$this->load->view('staf/view-user', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function manageuser($id)
+	{
+		$data['title'] = 'Kelola Peserta';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('kelas', 'kelas.kelas_id = user.kelas_id');
+		$this->db->join('program', 'program.prog_id = kelas.prog_id');
+		$this->db->where('user.id', $id);
+		$data['users'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('kelas');
+		$this->db->join('program', 'program.prog_id = kelas.prog_id');
+		$this->db->where('kelas.jenis_kelamin', $data['users']['gender']);
+		$data['kelas'] = $this->db->get()->result_array();
+
+		$this->form_validation->set_rules('name', 'Name', 'required|trim');
+		$this->form_validation->set_rules('kelas_id', 'Kelas', 'required|trim');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('staf/manage-user', $data);
+			$this->load->view('templates/footer');
+		} else {
+			$email = $this->input->post('email');
+			$user = $this->db->get_where('user', ['email' => $email])->row_array();
+			$old_password = $user['password'];
+			if ($this->input->post('new_password') == NULL) {
+				$password = $old_password;
+			} else {
+				$new_password = $this->input->post('new_password');
+				$password = password_hash($new_password, PASSWORD_DEFAULT);
+			}
+			$data = [
+				'name' => htmlspecialchars($this->input->post('name', true)),
+				'kelas_id' => $this->input->post('kelas_id'),
+				'password' => $password,
+				'is_active' => $this->input->post('is_active'),
+				'date_modified' => time()
+			];
+
+			$this->db->where('email', $email);
+			$this->db->update('user', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> User edited!</div>');
+			redirect('staf/users');
+		}
+
+	}
+
+	public function deleteuser($id)
+	{
+		$data['user'] = $this->db->get_where('user', ['id' => $id])->row_array();
+		$this->db->delete('user', ['id' => $id]);
+		$this->db->delete('user_detail', ['email' => $data['user']['email']]);
+		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> User deleted!</div>');
+		redirect('staf/users');
 	}
 
 	public function tampilSPU()
@@ -344,9 +444,9 @@ class Staf extends CI_Controller
 		$this->db->select('*');
 		$this->db->from('spu');
 		$this->db->join('upa', 'upa.spu_id = spu.id');
-		$this->db->join('level', 'level.id = upa.level_id');
+		$this->db->join('level', 'level.id = upa.prog_id');
 		$this->db->where('upa.spu_id', $id);
-		$this->db->order_by('upa.level_id, upa.nama_ketua');
+		$this->db->order_by('upa.prog_id, upa.nama_ketua');
 		$data['upa'] = $this->db->get()->result_array();
 
 			$this->load->view('templates/header', $data);
@@ -455,79 +555,6 @@ class Staf extends CI_Controller
 		$this->db->delete('mutabaah', ['mtb_id' => $id]);
 		$this->session->set_flashdata('message', '<div class="alert col-sm-6 alert-danger" role="alert"> Data berhasil dihapus!</div>');
 		redirect("kaderisasi/tampilanggota/$no");
-	}
-
-	public function users()
-	{
-		$data['title'] = 'Data Anggota';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-		$this->db->select('*, user.id AS user_id');
-		$this->db->from('user');
-		$this->db->join('upa', 'user.upa_id = upa.upa_id');
-		$this->db->join('spu', 'upa.spu_id = spu.id');
-		$this->db->join('level', 'upa.level_id = level.id');
-		$this->db->order_by('upa.level_id', 'ASC');
-		$this->db->order_by('user.name', 'ASC');
-		$data['users'] = $this->db->get()->result_array();
-		
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/topbar', $data);
-		$this->load->view('templates/sidebar', $data);
-		$this->load->view('kaderisasi/users', $data);
-		$this->load->view('templates/footer');
-		
-	}
-
-	public function manageuser($id)
-	{
-		$data['title'] = 'Data Anggota';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-		$this->db->select('*');
-		$this->db->from('user');
-		$this->db->join('upa', 'user.upa_id = upa.upa_id');
-		$this->db->where('user.id', $id);
-		$data['users'] = $this->db->get()->row_array();
-
-		$this->db->order_by('nama_ketua', 'ASC');
-		$data['upa'] = $this->db->get_where('upa', ['jenis_kelamin' => $data['users']['gender']])->result_array();
-
-		$this->form_validation->set_rules('name', 'Name', 'required|trim');
-		$this->form_validation->set_rules('role_id', 'Role', 'required|trim');
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/topbar', $data);
-			$this->load->view('templates/sidebar', $data);
-			$this->load->view('kaderisasi/manage-user', $data);
-			$this->load->view('templates/footer');
-		} else {
-			$email = $this->input->post('email');
-			$new_password = $this->input->post('new_password');
-			$password_hash = password_hash($new_password, PASSWORD_DEFAULT);
-			$data = [
-				'name' => htmlspecialchars($this->input->post('name', true)),
-				'role_id' => $this->input->post('role_id'),
-				'password' => $password_hash,
-				'is_active' => $this->input->post('is_active'),
-				'date_modified' => time()
-			];
-
-			$this->db->where('email', $email);
-			$this->db->update('user', $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> User edited!</div>');
-			redirect('admin/users');
-		}
-
-	}
-
-	public function deleteuser($id)
-	{
-		
-		$this->db->delete('user', ['id' => $id]);
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> User deleted!</div>');
-		redirect('admin/users');
 	}
 
 	public function get_jeniskelamin()

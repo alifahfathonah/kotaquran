@@ -31,30 +31,30 @@
           		<?php endif; ?>
           		<div class="card">
 					<div class="card-header">
-					Kelola UPA
+					Kelola Kelas
 					</div>
 					<div class="card-body">
 						
-						<form action="<?= base_url('kaderisasi/editupa/').$upa['upa_id']; ?>" method="post">
+						<form action="<?= base_url('staf/editkelas/').$kelas['kelas_id']; ?>" method="post">
 					      <div class="modal-body">
 						  	<div class="form-group row">
-								<label for="spu_id" class="col-sm-4 col-form-label">Nama SPU</label>
+								<label for="rq_id" class="col-sm-4 col-form-label">Nama RQ</label>
 								<div class="col-sm-8">
-									<select name="spu_id" id="spu_id" class="form-control select2">
-										<option value="<?= $upa['spu_id']; ?>"><?= $upa['nama_spu']; ?></option>
-										<?php foreach ($spu AS $spu) : ?>
-											<option value="<?= $spu['id']; ?>"><?= $spu['nama_spu']; ?></option>
+									<select name="rq_id" id="rq_id" class="form-control select2">
+										<option value="<?= $kelas['rq_id']; ?>"><?= $kelas['nama_rq']; ?></option>
+										<?php foreach ($rq AS $rq) : ?>
+											<option value="<?= $rq['id']; ?>"><?= $rq['nama_rq']; ?></option>
 										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="level_id" class="col-sm-4 col-form-label">Level Anggota</label>
+								<label for="prog_id" class="col-sm-4 col-form-label">Program Belajar</label>
 								<div class="col-sm-8">
-									<select name="level_id" id="level_id" class="form-control select2">
-										<option value="<?= $upa['level_id']; ?>"><?= $upa['nama_level']; ?></option>
-										<?php foreach ($level AS $lev) : ?>
-											<option value="<?= $lev['id']; ?>"><?= $lev['nama_level']; ?></option>
+									<select name="prog_id" id="prog_id" class="form-control select2">
+										<option value="<?= $kelas['prog_id']; ?>"><?= $kelas['nama_program']; ?></option>
+										<?php foreach ($program AS $prog) : ?>
+											<option value="<?= $prog['prog_id']; ?>"><?= $prog['nama_program']; ?></option>
 										<?php endforeach; ?>
 									</select>
 								</div>
@@ -63,26 +63,20 @@
 								<label for="jenis_kelamin" class="col-sm-4 col-form-label">Kelompok (Ikhwan/Akhwat)</label>
 								<div class="col-sm-8">
 									<select name="jenis_kelamin" id="jenis_kelamin" class="form-control select2">
-										<option value="<?= $upa['jenis_kelamin']; ?>"><?= $upa['jenis_kelamin'] == 1 ? 'Ikhwan' : 'Akhwat'; ?></option>
+										<option value="<?= $kelas['jenis_kelamin']; ?>"><?= $kelas['jenis_kelamin'] == 1 ? 'Ikhwan' : 'Akhwat'; ?></option>
 										<option value="1">Ikhwan</option>
 										<option value="0">Akhwat</option>
 									</select>
 								</div>
 							</div>
 						  	<div class="form-group row">
-								<label for="nama_ketua" class="col-sm-4 col-form-label">Ketua UPA</label>
+								<label for="pengajar" class="col-sm-4 col-form-label">Pengajar</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="nama_ketua" name="nama_ketua" value="<?= $upa['nama_ketua']; ?>" required>
-							    </div>
-						  	</div>
-							<div class="form-group row">
-								<label for="nama_upa" class="col-sm-4 col-form-label">Nama Grup</label>
-								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="nama_upa" name="nama_upa" value="<?= $upa['nama_upa']; ?>" required>
+							    	<input type="text" class="form-control" id="pengajar" name="pengajar" value="<?= $kelas['pengajar']; ?>" required>
 							    </div>
 						  	</div>
 					      </div>
-						<a href="<?= base_url('kaderisasi/upa'); ?>" class="btn btn-secondary">Cancel</a>
+						<a href="<?= base_url('staf/kelas'); ?>" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">Save</button>
 						</form>
 						

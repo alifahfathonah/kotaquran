@@ -27,7 +27,7 @@
             <?= $this->session->flashdata('message'); ?>
             <div class="row">
               <div class="col-sm-12">
-                <a class="btn btn-info ml-2 mb-3" href="<?= base_url('staf/tambahupa/'); ?>">Tambah UPA</a>
+                <a class="btn btn-info ml-2 mb-3" href="<?= base_url('staf/tambahkelas/'); ?>">Tambah Kelas</a>
               </div>
             </div>
             <div class="row">
@@ -80,7 +80,7 @@
                   <td><?= $kls['jenis_kelamin'] == 1 ? 'Ikhwan' : 'Akhwat'; ?></td>
                   <td><?= $kls['pengajar']; ?></td>
                   <td>
-                    <a href="<?= base_url('staf/editupa/') . $kls['kelas_id']; ?>" class="badge badge-success">edit</a>
+                    <a href="<?= base_url('staf/editkelas/') . $kls['kelas_id']; ?>" class="badge badge-success">edit</a>
                     <a href="javascript:hapusData(<?= $kls['kelas_id']; ?>)" class="badge badge-danger">delete</a>
                   </td>
                 </tr>
@@ -119,7 +119,7 @@
 <script language="JavaScript" type="text/javascript">
   function hapusData(id){
     if (confirm("Apakah anda yakin akan menghapus data ini?")){
-        window.location.href = 'hapusupa/' + id;
+        window.location.href = 'hapuskelas/' + id;
     }
   }
 </script>

@@ -31,14 +31,14 @@
           		<?php endif; ?>
           		<div class="card">
 					<div class="card-header">
-					Edit Anggota
+					Manage User
 					</div>
 					<div class="card-body">
 						
-						<form action="<?= base_url('kaderisasi/manageuser'); ?>/<?= $users['id'] ?>" method="post">
+						<form action="<?= base_url('staf/manageuser'); ?>/<?= $users['id'] ?>" method="post">
 					      <div class="modal-body">
-					        <div class="form-group row">
-								<label for="email" class="col-sm-4 col-form-label">No. Handphone</label>
+						  	<div class="form-group row">
+								<label for="email" class="col-sm-4 col-form-label">Email</label>
 								<div class="col-sm-8">
 							    	<input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $users['email']; ?>" readonly>
 							    </div>
@@ -46,18 +46,24 @@
 						  	<div class="form-group row">
 								<label for="email" class="col-sm-4 col-form-label">Nama</label>
 								<div class="col-sm-8">
-							    	<input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $users['name']; ?>" readonly>
+							    	<input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $users['name']; ?>">
 							    </div>
 						  	</div>
 						  	<div class="form-group row">
-								<label for="email" class="col-sm-4 col-form-label">Pembimbing UPA</label>
+								<label for="email" class="col-sm-4 col-form-label">Kelas</label>
 								<div class="col-sm-8">
-									<select name="upa_id" id="upa_id" class="form-control">
-										<option value="<?= $users['upa_id']; ?>"><?= $users['nama_ketua']; ?></option>
-										<?php foreach ($upa as $u) : ?>
-											<option value="<?= $u['upa_id']; ?>"><?= $u['nama_ketua']; ?></option>
+									<select name="kelas_id" id="kelas_id" class="form-control">
+										<option value="<?= $users['kelas_id']; ?>"><?= $users['nama_program'] . " - " . $users['pengajar']; ?></option>
+										<?php foreach ($kelas as $kls) : ?>
+											<option value="<?= $kls['kelas_id']; ?>"><?= $kls['nama_program'] . " - " . $kls['pengajar']; ?></option>
 										<?php endforeach; ?>
 									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="new_password" class="col-sm-4 col-form-label">Kata sandi baru</label>
+								<div class="col-sm-8">
+									<input type="password" class="form-control" id="new_password" name="new_password" placeholder="Kosongkan jika tidak diubah">
 								</div>
 							</div>
 							<div class="form-group">
@@ -69,7 +75,7 @@
 								</div>
 						  	</div>
 					      </div>
-						<a href="<?= base_url('kaderisasi/users'); ?>" class="btn btn-secondary">Cancel</a>
+						<a href="<?= base_url('staf/users'); ?>" class="btn btn-secondary">Cancel</a>
 						<button type="submit" class="btn btn-primary">Save</button>
 						</form>
 						

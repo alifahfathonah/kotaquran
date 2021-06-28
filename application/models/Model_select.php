@@ -31,7 +31,7 @@ Class Model_select extends CI_Model
         $this->db->select('*');
 		$this->db->from('kelas');
 		$this->db->join('program', 'program.prog_id = kelas.prog_id');
-		$this->db->where('kelas.jenis_kelamin', $id);
+		$this->db->where(['kelas.jenis_kelamin' => $id, 'kelas.rq_id' => 1]);
 		return $this->db->get()->result();
         
         // $this->db->where('jenis_kelamin', $id);

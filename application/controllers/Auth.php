@@ -103,6 +103,7 @@ class Auth extends CI_Controller
 				'name' => htmlspecialchars($this->input->post('name', true)),
 				'email' => htmlspecialchars($email),
 				'gender' => $this->input->post('j_kelamin'),
+				'kelas_id' => $this->input->post('pengajar'),
 				'province_id' => $this->input->post('provinsi'),
 				'regency_id' => $this->input->post('kabupaten'),
 				'district_id' => $this->input->post('kecamatan'),

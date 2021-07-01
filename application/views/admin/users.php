@@ -34,6 +34,7 @@
   				      <th scope="col">Email</th>
   				      <th scope="col">Name</th>
   				      <th scope="col">Role</th>
+                <th scope="col">Bio</th>
   				      <th scope="col">Active</th>
   				      <th scope="col">Date Modified</th>
   				      <th scope="col">Action</th>
@@ -48,7 +49,8 @@
   				      <th scope="row"><?= $i; ?></th>
   				      <td><?= $user['email']; ?></td>
   				      <td><?= $user['name']; ?></td>
-  				      <td><?= $user['role'] ?></td>
+  				      <td><?= $user['role']; ?></td>
+                <td><?= $user['image'] == "default.jpg" ? "Belum Lengkap" : "Lengkap"; ?></td>
   				      <td><?= $user['is_active'] == 1 ? 'Yes' : 'No'; ?></td>
   				      <td><?= date('d-M-Y H:m:s', $user['date_modified']);?></td>
   				      <td>
